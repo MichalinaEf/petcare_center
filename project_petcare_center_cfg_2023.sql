@@ -266,6 +266,7 @@ WHERE
 	CREATE TRIGGER TR_UpdatePremium AFTER INSERT on visits FOR EACH ROW
 	BEGIN
 	declare clientId INT;
+    
 	select Client_Id from pets where Pet_Id = NEW.Pet_Id into clientId;
 	IF countVisitsForClient(clientId) >= 3 THEN
 	UPDATE clients SET premium = 1 where clientId = Client_Id;
@@ -273,7 +274,9 @@ WHERE
 	END //
 	DELIMITER ;
         
-    insert into visits values (91,'09:20:00', '2023-11-08', 1, 12, 5);
+	-- visits(Visit_id, Time_of_visit, Date_of_visit, Pet_id, Specialist_id, Service_id)
+    -- (for Client 9, pet 11,12)
+    insert into visits values (93,'12:20:00', '2023-10-12', 11, 7, 8);
 
 -- In your database, create an event and demonstrate how it runs
 
